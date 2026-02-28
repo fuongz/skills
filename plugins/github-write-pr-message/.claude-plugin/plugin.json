@@ -1,0 +1,5 @@
+{
+	"name": "github-write-pr-message",
+	"description": "Generate a well-structured GitHub Pull Request message from your current git diff and commit history.",
+	"version": "1.0.0"
+}

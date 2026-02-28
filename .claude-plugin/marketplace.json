@@ -1,0 +1,26 @@
+{
+	"name": "fuongz-skills",
+	"owner": {
+		"name": "fuongz"
+	},
+	"metadata": {
+		"description": "A collection of Claude Code skills by fuongz."
+	},
+	"plugins": [
+		{
+			"name": "github-write-pr-message",
+			"source": "./plugins/github-write-pr-message",
+			"description": "Generate a well-structured GitHub Pull Request message from your current git diff and commit history.",
+			"version": "1.0.0",
+			"author": {
+				"name": "fuongz"
+			},
+			"homepage": "https://github.com/fuongz/skills",
+			"repository": "https://github.com/fuongz/skills",
+			"license": "MIT",
+			"keywords": ["git", "github", "pull-request", "pr", "productivity"],
+			"category": "github",
+			"tags": ["git", "github", "pull-request", "pr", "productivity"]
+		}
+	]
+}

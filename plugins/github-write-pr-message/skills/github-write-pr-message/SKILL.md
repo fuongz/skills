@@ -1,5 +1,4 @@
 ---
-name: Write_PR_Message
 description: Generate a GitHub Pull Request message following GitHub's PR template guidelines. Use when the user wants to create a PR, write a pull request description, or asks to summarize changes for a PR.
 argument-hint: "[context or focus area]"
 ---
@@ -15,7 +14,7 @@ Generate a well-structured GitHub Pull Request message following GitHub's offici
 - Branch: !`git branch --show-current`
 - Commits: !`git log main..HEAD --oneline 2>/dev/null || git log master..HEAD --oneline 2>/dev/null || git log --oneline -10`
 - Changed files: !`git diff --name-status main..HEAD 2>/dev/null || git diff --name-status master..HEAD 2>/dev/null || git diff --name-status HEAD~1..HEAD`
-- Diff: !`git diff HEAD`
+- Diff: !`git diff main..HEAD 2>/dev/null || git diff master..HEAD 2>/dev/null || git diff HEAD~1..HEAD`
 
 ## Workflow
 
