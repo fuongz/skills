@@ -42,12 +42,64 @@ rm -f index.ts README.md   # clean up bun's default files
 bun add @tanstack/react-start @tanstack/react-router react react-dom tailwindcss @tailwindcss/vite
 
 # Dev deps
-bun add -D vite @vitejs/plugin-react vite-tsconfig-paths @types/react @types/react-dom @cloudflare/vite-plugin wrangler typescript
+bun add -D vite @vitejs/plugin-react vite-tsconfig-paths @types/react @types/react-dom @cloudflare/vite-plugin wrangler typescript @biomejs/biome
 ```
 
 ---
 
-## Step 3 — Write `tsconfig.json`
+## Step 3 — Init Biome
+
+```bash
+bunx biome init
+```
+
+Then overwrite `biome.json` with the following (uses local `$schema` from node_modules):
+
+```json
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "includes": ["**", "!**/src/routeTree.gen.ts"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "tab"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double"
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  }
+}
+```
+
+---
+
+## Step 4 — Write `tsconfig.json`
 
 > **Why these settings matter:**
 > - `moduleResolution: "Bundler"` is required for Vite's import resolution to work correctly.
@@ -76,7 +128,7 @@ bun add -D vite @vitejs/plugin-react vite-tsconfig-paths @types/react @types/rea
 
 ---
 
-## Step 4 — Write `vite.config.ts`
+## Step 5 — Write `vite.config.ts`
 
 > **Plugin order is critical.** `cloudflare()` must come before `tanstackStart()`, and `viteReact()` must come after `tanstackStart()`. The `cloudflare` plugin targets the SSR environment so the Workers bundle is created correctly.
 
@@ -102,7 +154,7 @@ export default defineConfig({
 
 ---
 
-## Step 5 — Write `wrangler.jsonc`
+## Step 6 — Write `wrangler.jsonc`
 
 Replace `<project-name>` with the actual project name.
 
@@ -122,7 +174,7 @@ Replace `<project-name>` with the actual project name.
 
 ---
 
-## Step 6 — Update `package.json`
+## Step 7 — Update `package.json`
 
 Replace the `bun init` defaults with proper scripts. Keep all dependencies that were installed.
 
@@ -137,7 +189,8 @@ Replace the `bun init` defaults with proper scripts. Keep all dependencies that 
     "preview": "vite preview",
     "deploy": "bun run build && wrangler deploy",
     "typecheck": "tsc --noEmit",
-    "lint": "tsc --noEmit",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
     "cf-typegen": "wrangler types"
   }
 }
@@ -145,7 +198,7 @@ Replace the `bun init` defaults with proper scripts. Keep all dependencies that 
 
 ---
 
-## Step 7 — Scaffold source files
+## Step 8 — Scaffold source files
 
 Create the following files exactly as shown.
 
@@ -261,7 +314,7 @@ function Home() {
 
 ---
 
-## Step 8 — Generate `routeTree.gen.ts`
+## Step 9 — Generate `routeTree.gen.ts`
 
 Run the dev server briefly — it will auto-generate `src/routeTree.gen.ts` on first start, then stop it.
 
@@ -274,7 +327,7 @@ Confirm `src/routeTree.gen.ts` now exists before proceeding.
 
 ---
 
-## Step 9 — Init shadcn/ui
+## Step 10 — Init shadcn/ui
 
 ```bash
 bunx --bun shadcn@latest init --preset aLrO8A --base base --template start
@@ -289,7 +342,7 @@ This preset configures:
 
 ---
 
-## Step 10 — Install Hugeicons
+## Step 11 — Install Hugeicons
 
 ```bash
 bun add @hugeicons/react @hugeicons/core-free-icons
@@ -305,7 +358,7 @@ import { HomeIcon } from '@hugeicons/core-free-icons'
 
 ---
 
-## Step 11 — Typecheck
+## Step 12 — Typecheck
 
 ```bash
 bun run typecheck

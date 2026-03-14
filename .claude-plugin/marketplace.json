@@ -21,6 +21,21 @@
 			"keywords": ["git", "github", "pull-request", "pr", "productivity"],
 			"category": "github",
 			"tags": ["git", "github", "pull-request", "pr", "productivity"]
+		},
+		{
+			"name": "init-stack",
+			"source": "./plugins/init-stack",
+			"description": "Scaffold a production-ready full-stack app with TanStack Start, Cloudflare Workers, shadcn/ui, Tailwind CSS v4, Biome, Hugeicons, and bun.",
+			"version": "1.0.0",
+			"author": {
+				"name": "fuongz"
+			},
+			"homepage": "https://github.com/fuongz/skills",
+			"repository": "https://github.com/fuongz/skills",
+			"license": "MIT",
+			"keywords": ["tanstack", "cloudflare", "shadcn", "tailwind", "bun", "scaffold", "boilerplate"],
+			"category": "scaffold",
+			"tags": ["tanstack", "cloudflare", "shadcn", "tailwind", "bun", "scaffold", "boilerplate"]
 		}
 	]
 }
