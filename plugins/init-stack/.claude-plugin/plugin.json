@@ -1,0 +1,5 @@
+{
+  "name": "init-stack",
+  "description": "Scaffold a new full-stack project with TanStack Start + Cloudflare Workers + shadcn/ui + Tailwind CSS v4 + Hugeicons + bun.",
+  "version": "1.0.0"
+}
